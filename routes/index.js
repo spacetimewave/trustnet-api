@@ -15,7 +15,8 @@ router.get('/', function(req, res, next) {
 router.get('sample/:username', async function(req, res, next) {
   const username = req.params.username;
   try {
-    const account = await dbRepo.getDocument(username);
+    const account = await req.dbRepository.getDocument(req.params.id);
+    console.log(account)
     if (!account) {
       res.sendStatus(404);
       return;
@@ -26,7 +27,13 @@ router.get('sample/:username', async function(req, res, next) {
   }
 });
 
-router.get('/api/v1/dns/search/username/:username', function(req, res, next) {
+router.get('/api/v1/dns/search/username/:username', async function(req, res, next) {
+  await req.dnsRepository.createDnsName({
+    id: 1,
+    name: 'test.stw',
+    url: 'http://test.com',
+    ip_addresses: []
+  });
   let account = {seed:"1234"}
   if(account === undefined){
     res.sendStatus(404);

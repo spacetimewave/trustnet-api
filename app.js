@@ -1,15 +1,24 @@
+require('dotenv').config({ path: '.env.localhost' });
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 var cors = require('cors');
+var DnsRepository = require('./repositories/DnsRepository');
 
 var indexRouter = require('./routes/index');
 
 var app = express();
 
 app.set('port', '3000');
+
+const dnsRepository = new DnsRepository(process.env.COUCHDB_URL, process.env.DNS_DATABASE_NAME, process.env.COUCHDB_USER, process.env.COUCHDB_PSWD);
+// Middleware to inject dbRepository into req
+app.use((req, res, next) => {
+  req.dnsRepository = dnsRepository;
+  next();
+});
 
 app.use(cors());
 //app.use(cors({origin: 'http://localhost:3000'}));
