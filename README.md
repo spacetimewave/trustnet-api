@@ -14,6 +14,14 @@ $ npm install express
 $ npx express-generator
 ```
 
+```console
+$ npm install typescript -D
+```
+
+```console
+$ npx tsc --init
+```
+
 ## Run
 
 ```console
