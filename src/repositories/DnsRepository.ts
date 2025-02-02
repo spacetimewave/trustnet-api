@@ -73,4 +73,61 @@ export class DnsRepository {
     const user = this.getDnsEntryByName(name);
     return user === undefined;
   }
+
+  async updateDnsEntry(name: string, updatedDoc: Partial<DnsEntry>) {
+    try {
+      console.log("updateDnsEntry");
+      console.log(this.dbEndpoint);
+      let database = Nano(this.dbEndpoint);
+      console.log("authenticating");
+      await database.auth(this.dbUser, this.dbPassword);
+      console.log("using database");
+      const table = database.db.use(this.dbName);
+      console.log("finding document");
+      const response = (await table.find({
+        selector: { name: name },
+      })) as MangoResponse<DnsEntry | undefined>;
+      if (response.docs.length === 0) {
+        throw new Error("Document not found");
+      }
+
+      const doc = response.docs[0];
+      console.log(doc);
+      const updatedEntry = { ...doc, ...updatedDoc };
+      console.log("updating document");
+      console.log(updatedEntry);
+      const updateResponse = await table.insert(updatedEntry);
+      console.log("document updated");
+      return updateResponse;
+    } catch (error) {
+      throw new Error(`Error updating document`);
+    }
+  }
+
+  async deleteDnsEntry(name: string) {
+    try {
+      console.log("deleteDnsEntry");
+      console.log(this.dbEndpoint);
+      let database = Nano(this.dbEndpoint);
+      console.log("authenticating");
+      await database.auth(this.dbUser, this.dbPassword);
+      console.log("using database");
+      const table = database.db.use(this.dbName);
+      console.log("finding document");
+      const response = (await table.find({
+        selector: { name: name },
+      })) as MangoResponse<DnsEntry | undefined>;
+      if (response.docs.length === 0) {
+        throw new Error("Document not found");
+      }
+
+      const doc = response.docs[0];
+      console.log("deleting document");
+      const deleteResponse = await table.destroy(doc._id, doc._rev);
+      console.log("document deleted");
+      return deleteResponse;
+    } catch (error) {
+      throw new Error(`Error deleting document`);
+    }
+  }
 }
