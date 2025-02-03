@@ -1,5 +1,5 @@
 import Nano, { MangoResponse } from "nano";
-import DnsEntry from "../models/DnsEntry";
+import { IDomainNameEntry } from "@spacetimewave/trustnet-engine";
 
 export class DnsRepository {
   public dbEndpoint: string;
@@ -19,7 +19,7 @@ export class DnsRepository {
     this.dbPassword = dbPassword;
   }
 
-  async createDnsName(doc: DnsEntry) {
+  async createDnsName(doc: IDomainNameEntry) {
     try {
       console.log("createDnsName");
       console.log(this.dbEndpoint);
@@ -39,7 +39,7 @@ export class DnsRepository {
     }
   }
 
-  async getDnsEntryByName(name: string): Promise<DnsEntry | undefined> {
+  async getDnsEntryByName(name: string): Promise<IDomainNameEntry | undefined> {
     try {
       console.log("getDnsEntryByName");
       console.log(this.dbEndpoint);
@@ -51,16 +51,16 @@ export class DnsRepository {
       console.log("finding document");
       const response = (await table.find({
         selector: { name: name },
-      })) as MangoResponse<DnsEntry | undefined>;
+      })) as MangoResponse<IDomainNameEntry | undefined>;
       if (response.docs.length === 0) {
         return undefined;
       }
 
       const doc = response.docs[0];
-      const dnsEntry: DnsEntry = {
-        name: doc.name,
-        urls: doc.urls,
-        ips: doc.ips,
+      const dnsEntry: IDomainNameEntry = {
+        domainName: doc.domainName,
+        domainUrls: doc.domainUrls,
+        domainIPs: doc.domainIPs,
       };
 
       return dnsEntry;
@@ -74,7 +74,7 @@ export class DnsRepository {
     return user === undefined;
   }
 
-  async updateDnsEntry(name: string, updatedDoc: Partial<DnsEntry>) {
+  async updateDnsEntry(name: string, updatedDoc: Partial<IDomainNameEntry>) {
     try {
       console.log("updateDnsEntry");
       console.log(this.dbEndpoint);
@@ -86,7 +86,7 @@ export class DnsRepository {
       console.log("finding document");
       const response = (await table.find({
         selector: { name: name },
-      })) as MangoResponse<DnsEntry | undefined>;
+      })) as MangoResponse<IDomainNameEntry | undefined>;
       if (response.docs.length === 0) {
         throw new Error("Document not found");
       }
@@ -116,7 +116,7 @@ export class DnsRepository {
       console.log("finding document");
       const response = (await table.find({
         selector: { name: name },
-      })) as MangoResponse<DnsEntry | undefined>;
+      })) as MangoResponse<IDomainNameEntry | undefined>;
       if (response.docs.length === 0) {
         throw new Error("Document not found");
       }

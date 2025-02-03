@@ -1,5 +1,5 @@
 import express from "express";
-import DnsEntry from "../models/DnsEntry";
+import { IDomainNameEntry } from "@spacetimewave/trustnet-engine";
 export const router = express.Router();
 
 router.get(
@@ -9,7 +9,7 @@ router.get(
     res: express.Response,
     next: express.NextFunction
   ) {
-    const dnsEntry: DnsEntry | undefined =
+    const dnsEntry: IDomainNameEntry | undefined =
       await req.dnsRepository.getDnsEntryByName(req.params.username);
 
     if (dnsEntry === undefined) {
@@ -28,13 +28,14 @@ router.post(
     res: express.Response,
     next: express.NextFunction
   ): Promise<void> {
-    const dnsEntry: DnsEntry = req.body;
+    const dnsEntry: IDomainNameEntry = req.body;
 
     if (
-      !dnsEntry.name ||
-      !dnsEntry.urls ||
-      !Array.isArray(dnsEntry.urls) ||
-      !Array.isArray(dnsEntry.ips)
+      !dnsEntry.domainName ||
+      !dnsEntry.domainIPs ||
+      !dnsEntry.domainUrls ||
+      !Array.isArray(dnsEntry.domainIPs) ||
+      !Array.isArray(dnsEntry.domainUrls)
     ) {
       res.status(400).json({ error: "Invalid request body" });
       return;
@@ -53,13 +54,14 @@ router.put(
     res: express.Response,
     next: express.NextFunction
   ): Promise<void> {
-    const dnsEntry: DnsEntry = req.body;
+    const dnsEntry: IDomainNameEntry = req.body;
 
     if (
-      !dnsEntry.name ||
-      !dnsEntry.urls ||
-      !Array.isArray(dnsEntry.urls) ||
-      !Array.isArray(dnsEntry.ips)
+      !dnsEntry.domainName ||
+      !dnsEntry.domainIPs ||
+      !dnsEntry.domainUrls ||
+      !Array.isArray(dnsEntry.domainIPs) ||
+      !Array.isArray(dnsEntry.domainUrls)
     ) {
       res.status(400).json({ error: "Invalid request body" });
       return;
@@ -74,7 +76,7 @@ router.put(
       return;
     }
 
-    await req.dnsRepository.updateDnsEntry(dnsEntry.name, {
+    await req.dnsRepository.updateDnsEntry(dnsEntry.domainName, {
       ...existingEntry,
       ...dnsEntry,
     });
