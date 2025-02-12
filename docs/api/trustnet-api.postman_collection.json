@@ -1,0 +1,147 @@
+{
+	"info": {
+		"_postman_id": "ec824cc5-1102-4a61-b7a1-382237a21a0b",
+		"name": "trustnet-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "26463812"
+	},
+	"item": [
+		{
+			"name": "v1",
+			"item": [
+				{
+					"name": "dns",
+					"item": [
+						{
+							"name": "dns/:domainName",
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"method": "GET",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/dns/javierhersan.stw",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"dns",
+										"javierhersan.stw"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "dns/:domainName",
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"header\": {\r\n        \"version\": 1,\r\n        \"output_hash\": \"0x01242f9577d4041aaa127bd628a61f2aa443c081b9c555bb3eb5dd8f5a7ad516\",\r\n        \"address\": \"0x0004008d00c3002b009a0013001e00bc004200fd0053004f00390044002300c800e50063000000c00059002b008100ff008e0030006500ac00f2002d008d00fa00dd008700a3003100d100e400160027004800e4002300b700c600c3008e00be0049003a002c00ee0033009e0092001800e40070003b005400ef008e009800ff00b0\",\r\n        \"public_key\": \"0x0004003800a4002200a00092006a007200e80041004500c9008600e900a60070006a0049008b001a008400b200a900ac00d800f4005b00a3003b007800f800a5003d00c400e800e2007900e9002200ad00f7005700f4004f008b001a00b3004700a6001d0034001d00fa004200c2003b00710028003800a200b900c400850091009a\",\r\n        \"signature\": \"0x00160005003a006900ab0020008e0010001c00f1004600a40077005b001c00910011002b00f700dc002b00cc003d007100bc00c100ce004900960050006700c3000600f300ab00aa00d900f200c00082008900d300e200df0057001100f80014003c002200b800c400770092003000f20015000a00ab00ab00c7002300ae00f7\"\r\n    },\r\n    \"content\": {\r\n        \"domainName\": \"username.stw\",\r\n        \"accountPublicKey\": \"0x0004008d00c3002b009a0013001e00bc004200fd0053004f00390044002300c800e50063000000c00059002b008100ff008e0030006500ac00f2002d008d00fa00dd008700a3003100d100e400160027004800e4002300b700c600c3008e00be0049003a002c00ee0033009e0092001800e40070003b005400ef008e009800ff00b0\",\r\n        \"hostingProviderAddresses\": [\r\n            \"username.com\",\r\n            \"username.net\",\r\n            \"10.10.10.10\"\r\n        ]\r\n    },\r\n    \"metadata\": {\r\n        \"seed_block\": {\r\n            \"version\": 1,\r\n            \"address\": \"0x0004008d00c3002b009a0013001e00bc004200fd0053004f00390044002300c800e50063000000c00059002b008100ff008e0030006500ac00f2002d008d00fa00dd008700a3003100d100e400160027004800e4002300b700c600c3008e00be0049003a002c00ee0033009e0092001800e40070003b005400ef008e009800ff00b0\",\r\n            \"public_key\": \"0x0004003800a4002200a00092006a007200e80041004500c9008600e900a60070006a0049008b001a008400b200a900ac00d800f4005b00a3003b007800f800a5003d00c400e800e2007900e9002200ad00f7005700f4004f008b001a00b3004700a6001d0034001d00fa004200c2003b00710028003800a200b900c400850091009a\",\r\n            \"update_id\": 1,\r\n            \"signature\": \"0x00bd00e1007700650029001900cd00a200ef00560051002900c8007400050090009600780092004100ad004a000100fa008b009d00cd00ab008800d1006f004d007400bb0086008d00fd001b00a3001000eb00db00a100c2008300cf00e400c3009f00f6003500b4009e0032002400800080000f001000d1001400950084006f\"\r\n        }\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/dns/javierhersan.stw",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"dns",
+										"javierhersan.stw"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "dns/:domainName",
+							"request": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"header\": {\r\n        \"version\": 1,\r\n        \"output_hash\": \"0xadb590b5c12eadd36840ed17414fa86b844bd3d9dc0bd71fe8247874628ed715\",\r\n        \"address\": \"0x000400bd008b00b2002b00a000a6004f002b005d004d0040007e0057008c00c200cc00ed00df00e4009c009b002900ce00eb00d0005000e700a8001b00a1003d00bb00a9008d00570011006c009c0047003400a2002100550078005700db00280053002d0055005300b300da00fd0056002700b3008900d700ad003c00c4002800f0\",\r\n        \"public_key\": \"0x0004005a00bf0051007a0081009b00c400a7000a00fc002800be00fd007e00bd007800b20096000000e9006700e10061009700b80018004000cb00cf00c10005008b002e008800bd0071000a00ec00730009001f004800d0007100d0003f0098006d009b00e100ae009100a900f400b5004000e9004500fc00b500b900ed0064004d\",\r\n        \"signature\": \"0x008400390050002c000d00d4008200fb006700d200a000ab001e009100ed00d200ca000d004500f50064003d004a0048002e00d4007e006100c00077004e0004002600a000cd001200460015004000cb000e000000aa00e500f900b5002b007c002000f000a300d800850013000c007b0018003f00f0008e00290063003200bc\"\r\n    },\r\n    \"content\": {\r\n        \"domainName\": \"username.stw\",\r\n        \"accountPublicKey\": \"0x000400bd008b00b2002b00a000a6004f002b005d004d0040007e0057008c00c200cc00ed00df00e4009c009b002900ce00eb00d0005000e700a8001b00a1003d00bb00a9008d00570011006c009c0047003400a2002100550078005700db00280053002d0055005300b300da00fd0056002700b3008900d700ad003c00c4002800f0\",\r\n        \"hostingProviderAddresses\": [\r\n            \"username.com\",\r\n            \"username.org\",\r\n            \"99.99.99.99\"\r\n        ]\r\n    },\r\n    \"metadata\": {\r\n        \"seed_block\": {\r\n            \"version\": 1,\r\n            \"address\": \"0x0004008d00c3002b009a0013001e00bc004200fd0053004f00390044002300c800e50063000000c00059002b008100ff008e0030006500ac00f2002d008d00fa00dd008700a3003100d100e400160027004800e4002300b700c600c3008e00be0049003a002c00ee0033009e0092001800e40070003b005400ef008e009800ff00b0\",\r\n            \"public_key\": \"0x0004003800a4002200a00092006a007200e80041004500c9008600e900a60070006a0049008b001a008400b200a900ac00d800f4005b00a3003b007800f800a5003d00c400e800e2007900e9002200ad00f7005700f4004f008b001a00b3004700a6001d0034001d00fa004200c2003b00710028003800a200b900c400850091009a\",\r\n            \"update_id\": 1,\r\n            \"signature\": \"0x00bd00e1007700650029001900cd00a200ef00560051002900c8007400050090009600780092004100ad004a000100fa008b009d00cd00ab008800d1006f004d007400bb0086008d00fd001b00a3001000eb00db00a100c2008300cf00e400c3009f00f6003500b4009e0032002400800080000f001000d1001400950084006f\"\r\n        }\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/dns/javierhersan.stw",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"dns",
+										"javierhersan.stw"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "dns/:domainName",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"header\": {},\r\n    \"metadata\": {},\r\n    \"content\": {\r\n        \"domainName\": \"javierhersan.stw\",\r\n        \"accountPublicKey\": \"0x9a59efbc471b53491c8038fd5d5fe3be0a229873302bafba90c19fbe7d7c7f35\",\r\n        \"hostingProviderAddresses\": [\r\n            \"javierhersan.com\"\r\n        ]\r\n    }\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "http://localhost:3000/api/v1/dns/javierhersan.stw",
+									"protocol": "http",
+									"host": [
+										"localhost"
+									],
+									"port": "3000",
+									"path": [
+										"api",
+										"v1",
+										"dns",
+										"javierhersan.stw"
+									]
+								}
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
