@@ -1,16 +1,16 @@
 import express from "express";
-import { IDomainNameEntry } from "@spacetimewave/trustnet-engine";
+import { IDnsRecord, IDnsRecordMessage } from "@spacetimewave/trustnet-engine";
 export const router = express.Router();
 
 router.get(
-  "/api/v1/dns/:username",
+  "/api/v1/dns/:domainName",
   async function (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ) {
-    const dnsEntry: IDomainNameEntry | undefined =
-      await req.dnsRepository.getDnsEntryByName(req.params.username);
+    const dnsEntry: IDnsRecord | undefined =
+      await req.dnsRepository.getDnsEntryByName(req.params.domainName);
 
     if (dnsEntry === undefined) {
       res.sendStatus(404);
@@ -22,63 +22,63 @@ router.get(
 );
 
 router.post(
-  "/api/v1/dns/:username",
+  "/api/v1/dns/:domainName",
   async function (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ): Promise<void> {
-    const dnsEntry: IDomainNameEntry = req.body;
+    const dnsRecordMessage: IDnsRecordMessage = req.body;
+    const dnsRecord: IDnsRecord = dnsRecordMessage.content;
 
     if (
-      !dnsEntry.domainName ||
-      !dnsEntry.domainIPs ||
-      !dnsEntry.domainUrls ||
-      !Array.isArray(dnsEntry.domainIPs) ||
-      !Array.isArray(dnsEntry.domainUrls)
+      !dnsRecord.domainName ||
+      !dnsRecord.accountPublicKey ||
+      !dnsRecord.hostingProviderAddresses ||
+      !Array.isArray(dnsRecord.hostingProviderAddresses)
     ) {
       res.status(400).json({ error: "Invalid request body" });
       return;
     }
 
-    await req.dnsRepository.createDnsName(dnsEntry);
+    await req.dnsRepository.createDnsName(dnsRecordMessage.content);
 
     res.sendStatus(201);
   }
 );
 
 router.put(
-  "/api/v1/dns/:username",
+  "/api/v1/dns/:domainName",
   async function (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ): Promise<void> {
-    const dnsEntry: IDomainNameEntry = req.body;
+    const dnsRecordMessage: IDnsRecordMessage = req.body;
+    const dnsRecord: IDnsRecord = dnsRecordMessage.content;
 
     if (
-      !dnsEntry.domainName ||
-      !dnsEntry.domainIPs ||
-      !dnsEntry.domainUrls ||
-      !Array.isArray(dnsEntry.domainIPs) ||
-      !Array.isArray(dnsEntry.domainUrls)
+      !dnsRecord.domainName ||
+      !dnsRecord.accountPublicKey ||
+      !dnsRecord.hostingProviderAddresses ||
+      !Array.isArray(dnsRecord.hostingProviderAddresses)
     ) {
       res.status(400).json({ error: "Invalid request body" });
       return;
     }
 
-    const existingEntry = await req.dnsRepository.getDnsEntryByName(
+    const existingDnsRecord = await req.dnsRepository.getDnsEntryByName(
       req.params.username
     );
 
-    if (existingEntry === undefined) {
+    if (existingDnsRecord === undefined) {
       res.sendStatus(404);
       return;
     }
 
-    await req.dnsRepository.updateDnsEntry(dnsEntry.domainName, {
-      ...existingEntry,
-      ...dnsEntry,
+    await req.dnsRepository.updateDnsEntry(dnsRecord.domainName, {
+      ...existingDnsRecord,
+      ...dnsRecord,
     });
 
     res.sendStatus(200);
@@ -86,13 +86,15 @@ router.put(
 );
 
 router.delete(
-  "/api/v1/dns/:username",
+  "/api/v1/dns/:domainName",
   async function (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ): Promise<void> {
-    await req.dnsRepository.deleteDnsEntry(req.params.username);
+    const dnsRecordMessage: IDnsRecordMessage = req.body;
+    const dnsRecord: IDnsRecord = dnsRecordMessage.content;
+    await req.dnsRepository.deleteDnsEntry(req.params.domainName);
 
     res.sendStatus(200);
   }

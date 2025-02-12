@@ -1,5 +1,5 @@
 import Nano, { MangoResponse } from "nano";
-import { IDomainNameEntry } from "@spacetimewave/trustnet-engine";
+import { IDnsRecord } from "@spacetimewave/trustnet-engine";
 
 export class DnsRepository {
   public dbEndpoint: string;
@@ -19,7 +19,7 @@ export class DnsRepository {
     this.dbPassword = dbPassword;
   }
 
-  async createDnsName(doc: IDomainNameEntry) {
+  async createDnsName(dnsRecord: IDnsRecord) {
     try {
       console.log("createDnsName");
       console.log(this.dbEndpoint);
@@ -31,7 +31,7 @@ export class DnsRepository {
       console.log("using database");
       const table = database.db.use(this.dbName);
       console.log("inserting document");
-      const response = await table.insert({ ...doc, _id: undefined }); // null id (assigned by CouchDB)
+      const response = await table.insert({ ...dnsRecord, _id: undefined }); // null id (assigned by CouchDB)
       console.log("document inserted");
       return response;
     } catch (error) {
@@ -39,7 +39,7 @@ export class DnsRepository {
     }
   }
 
-  async getDnsEntryByName(name: string): Promise<IDomainNameEntry | undefined> {
+  async getDnsEntryByName(domainName: string): Promise<IDnsRecord | undefined> {
     try {
       console.log("getDnsEntryByName");
       console.log(this.dbEndpoint);
@@ -50,31 +50,31 @@ export class DnsRepository {
       const table = database.db.use(this.dbName);
       console.log("finding document");
       const response = (await table.find({
-        selector: { name: name },
-      })) as MangoResponse<IDomainNameEntry | undefined>;
+        selector: { domainName: domainName },
+      })) as MangoResponse<IDnsRecord | undefined>;
       if (response.docs.length === 0) {
         return undefined;
       }
 
       const doc = response.docs[0];
-      const dnsEntry: IDomainNameEntry = {
+      const dnsRecord: IDnsRecord = {
         domainName: doc.domainName,
-        domainUrls: doc.domainUrls,
-        domainIPs: doc.domainIPs,
+        accountPublicKey: doc.accountPublicKey,
+        hostingProviderAddresses: doc.hostingProviderAddresses,
       };
 
-      return dnsEntry;
+      return dnsRecord;
     } catch (error: unknown) {
       throw new Error();
     }
   }
 
-  async checkDnsNameAvailability(name: string): Promise<boolean> {
-    const user = this.getDnsEntryByName(name);
+  async checkDnsNameAvailability(domainName: string): Promise<boolean> {
+    const user = this.getDnsEntryByName(domainName);
     return user === undefined;
   }
 
-  async updateDnsEntry(name: string, updatedDoc: Partial<IDomainNameEntry>) {
+  async updateDnsEntry(domainName: string, dnsRecord: Partial<IDnsRecord>) {
     try {
       console.log("updateDnsEntry");
       console.log(this.dbEndpoint);
@@ -85,15 +85,15 @@ export class DnsRepository {
       const table = database.db.use(this.dbName);
       console.log("finding document");
       const response = (await table.find({
-        selector: { name: name },
-      })) as MangoResponse<IDomainNameEntry | undefined>;
+        selector: { domainName: domainName },
+      })) as MangoResponse<IDnsRecord | undefined>;
       if (response.docs.length === 0) {
         throw new Error("Document not found");
       }
 
       const doc = response.docs[0];
       console.log(doc);
-      const updatedEntry = { ...doc, ...updatedDoc };
+      const updatedEntry = { ...doc, ...dnsRecord };
       console.log("updating document");
       console.log(updatedEntry);
       const updateResponse = await table.insert(updatedEntry);
@@ -104,7 +104,7 @@ export class DnsRepository {
     }
   }
 
-  async deleteDnsEntry(name: string) {
+  async deleteDnsEntry(domainName: string) {
     try {
       console.log("deleteDnsEntry");
       console.log(this.dbEndpoint);
@@ -115,8 +115,8 @@ export class DnsRepository {
       const table = database.db.use(this.dbName);
       console.log("finding document");
       const response = (await table.find({
-        selector: { name: name },
-      })) as MangoResponse<IDomainNameEntry | undefined>;
+        selector: { domainName: domainName },
+      })) as MangoResponse<IDnsRecord | undefined>;
       if (response.docs.length === 0) {
         throw new Error("Document not found");
       }
