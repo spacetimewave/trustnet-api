@@ -1,16 +1,24 @@
 import express from "express";
-import { IDnsRecord, IDnsRecordMessage } from "@spacetimewave/trustnet-engine";
+import {
+  IDnsRecord,
+  ICreateDnsRecordMessage,
+  IDeleteDnsRecordMessage,
+  IGetDnsRecordMessage,
+  IUpdateDnsRecordMessage,
+} from "@spacetimewave/trustnet-engine";
 export const router = express.Router();
 
 router.get(
-  "/api/v1/dns/:domainName",
+  "/api/v1/dns/record",
   async function (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ) {
+    const dnsRecordMessage: IGetDnsRecordMessage = req.body;
+    const domainName = dnsRecordMessage.content.domainName;
     const dnsEntry: IDnsRecord | undefined =
-      await req.dnsRepository.getDnsEntryByName(req.params.domainName);
+      await req.dnsRepository.getDnsEntryByName(domainName);
 
     if (dnsEntry === undefined) {
       res.sendStatus(404);
@@ -22,14 +30,14 @@ router.get(
 );
 
 router.post(
-  "/api/v1/dns/:domainName",
+  "/api/v1/dns/record",
   async function (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ): Promise<void> {
-    const dnsRecordMessage: IDnsRecordMessage = req.body;
-    const dnsRecord: IDnsRecord = dnsRecordMessage.content;
+    const dnsRecordMessage: ICreateDnsRecordMessage = req.body;
+    const dnsRecord: IDnsRecord = dnsRecordMessage.content.dnsRecord;
 
     if (
       !dnsRecord.domainName ||
@@ -41,21 +49,21 @@ router.post(
       return;
     }
 
-    await req.dnsRepository.createDnsName(dnsRecordMessage.content);
+    await req.dnsRepository.createDnsName(dnsRecord);
 
     res.sendStatus(201);
   }
 );
 
 router.put(
-  "/api/v1/dns/:domainName",
+  "/api/v1/dns/record",
   async function (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ): Promise<void> {
-    const dnsRecordMessage: IDnsRecordMessage = req.body;
-    const dnsRecord: IDnsRecord = dnsRecordMessage.content;
+    const dnsRecordMessage: IUpdateDnsRecordMessage = req.body;
+    const dnsRecord: IDnsRecord = dnsRecordMessage.content.dnsRecord;
 
     if (
       !dnsRecord.domainName ||
@@ -68,7 +76,7 @@ router.put(
     }
 
     const existingDnsRecord = await req.dnsRepository.getDnsEntryByName(
-      req.params.username
+      dnsRecord.domainName
     );
 
     if (existingDnsRecord === undefined) {
@@ -86,15 +94,15 @@ router.put(
 );
 
 router.delete(
-  "/api/v1/dns/:domainName",
+  "/api/v1/dns/record",
   async function (
     req: express.Request,
     res: express.Response,
     next: express.NextFunction
   ): Promise<void> {
-    const dnsRecordMessage: IDnsRecordMessage = req.body;
-    const dnsRecord: IDnsRecord = dnsRecordMessage.content;
-    await req.dnsRepository.deleteDnsEntry(req.params.domainName);
+    const dnsRecordMessage: IDeleteDnsRecordMessage = req.body;
+    const domainName = dnsRecordMessage.content.domainName;
+    await req.dnsRepository.deleteDnsEntry(domainName);
 
     res.sendStatus(200);
   }
