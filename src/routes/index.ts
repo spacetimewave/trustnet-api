@@ -15,17 +15,15 @@ router.get(
     res: express.Response,
     next: express.NextFunction
   ) {
-    const dnsRecordMessage: IGetDnsRecordMessage = req.body;
-    const domainName = dnsRecordMessage.content.domainName;
-    const dnsEntry: IDnsRecord | undefined =
-      await req.dnsRepository.getDnsEntryByName(domainName);
+    const getDnsRecordMessage: IGetDnsRecordMessage = req.body;
+    const dnsRecord = await req.dnsService.getDnsRecord(getDnsRecordMessage);
 
-    if (dnsEntry === undefined) {
+    if (dnsRecord === undefined) {
       res.sendStatus(404);
       return;
     }
 
-    res.json(dnsEntry);
+    res.json(dnsRecord);
   }
 );
 
@@ -36,21 +34,8 @@ router.post(
     res: express.Response,
     next: express.NextFunction
   ): Promise<void> {
-    const dnsRecordMessage: ICreateDnsRecordMessage = req.body;
-    const dnsRecord: IDnsRecord = dnsRecordMessage.content.dnsRecord;
-
-    if (
-      !dnsRecord.domainName ||
-      !dnsRecord.accountPublicKey ||
-      !dnsRecord.hostingProviderAddresses ||
-      !Array.isArray(dnsRecord.hostingProviderAddresses)
-    ) {
-      res.status(400).json({ error: "Invalid request body" });
-      return;
-    }
-
-    await req.dnsRepository.createDnsName(dnsRecord);
-
+    const createDnsRecordMessage: ICreateDnsRecordMessage = req.body;
+    await req.dnsService.createDnsRecord(createDnsRecordMessage);
     res.sendStatus(201);
   }
 );

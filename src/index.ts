@@ -4,16 +4,17 @@ import express from "express";
 import cookieParser from "cookie-parser";
 import logger from "morgan";
 import cors from "cors";
-import { DnsRepository } from "./repositories/DnsRepository";
+
 import { router as indexRouter } from "./routes/index";
+
+import { DnsRepository } from "./repositories/DnsRepository";
+import { DnsService } from "./services/DnsService";
 
 dotenv.config({ path: __dirname + "/.env.localhost" });
 var app = express();
-
 app.set("port", "3000");
 
-console.log(process.env.COUCHDB_URL);
-
+// Repositories and Services
 const dnsRepository = new DnsRepository(
   process.env.COUCHDB_URL ?? "",
   process.env.DNS_DATABASE_NAME ?? "",
@@ -21,28 +22,30 @@ const dnsRepository = new DnsRepository(
   process.env.COUCHDB_PSWD ?? ""
 );
 
-// Middleware to inject dbRepository into req
+const dnsService = new DnsService(dnsRepository);
+
+// Dependency Injection Middleware
 declare global {
   namespace Express {
     interface Request {
       dnsRepository: DnsRepository;
+      dnsService: DnsService;
     }
   }
 }
 
 app.use((req, res, next) => {
   req.dnsRepository = dnsRepository;
+  req.dnsService = dnsService;
   next();
 });
 
 app.use(cors());
 //app.use(cors({origin: 'http://localhost:3000'}));
-
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-
 app.use("/", indexRouter);
 
 // catch 404 and forward to error handler

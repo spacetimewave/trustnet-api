@@ -19,7 +19,7 @@ export class DnsRepository {
     this.dbPassword = dbPassword;
   }
 
-  async createDnsName(dnsRecord: IDnsRecord) {
+  async createDnsRecord(dnsRecord: IDnsRecord) {
     try {
       console.log("createDnsName");
       console.log(this.dbEndpoint);
@@ -92,7 +92,6 @@ export class DnsRepository {
       }
 
       const doc = response.docs[0];
-      console.log(doc);
       const updatedEntry = { ...doc, ...dnsRecord };
       console.log("updating document");
       console.log(updatedEntry);
