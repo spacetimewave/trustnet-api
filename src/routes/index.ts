@@ -9,7 +9,7 @@ import {
 export const router = express.Router();
 
 router.get(
-  "/api/v1/dns/record",
+  "/api/v1/dns/record/get",
   async function (
     req: express.Request,
     res: express.Response,
@@ -28,7 +28,7 @@ router.get(
 );
 
 router.post(
-  "/api/v1/dns/record",
+  "/api/v1/dns/record/create",
   async function (
     req: express.Request,
     res: express.Response,
@@ -40,8 +40,8 @@ router.post(
   }
 );
 
-router.put(
-  "/api/v1/dns/record",
+router.post(
+  "/api/v1/dns/record/update",
   async function (
     req: express.Request,
     res: express.Response,
@@ -78,8 +78,8 @@ router.put(
   }
 );
 
-router.delete(
-  "/api/v1/dns/record",
+router.post(
+  "/api/v1/dns/record/delete",
   async function (
     req: express.Request,
     res: express.Response,
