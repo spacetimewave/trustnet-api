@@ -8,7 +8,7 @@ import {
 } from "@spacetimewave/trustnet-engine";
 export const router = express.Router();
 
-router.get(
+router.post(
   "/api/v1/dns/record/get",
   async function (
     req: express.Request,
@@ -16,6 +16,7 @@ router.get(
     next: express.NextFunction
   ) {
     const getDnsRecordMessage: IGetDnsRecordMessage = req.body;
+    console.log(getDnsRecordMessage);
     const dnsRecord = await req.dnsService.getDnsRecord(getDnsRecordMessage);
 
     if (dnsRecord === undefined) {
