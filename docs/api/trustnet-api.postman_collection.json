@@ -13,12 +13,9 @@
 					"name": "dns",
 					"item": [
 						{
-							"name": "dns/record",
-							"protocolProfileBehavior": {
-								"disableBodyPruning": true
-							},
+							"name": "dns/record/get",
 							"request": {
-								"method": "GET",
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
@@ -30,7 +27,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/v1/dns/record",
+									"raw": "http://localhost:3000/api/v1/dns/record/get",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -40,14 +37,15 @@
 										"api",
 										"v1",
 										"dns",
-										"record"
+										"record",
+										"get"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "dns/record",
+							"name": "dns/record/create",
 							"request": {
 								"method": "POST",
 								"header": [],
@@ -61,7 +59,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/v1/dns/record",
+									"raw": "http://localhost:3000/api/v1/dns/record/create",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -71,16 +69,17 @@
 										"api",
 										"v1",
 										"dns",
-										"record"
+										"record",
+										"create"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "dns/record",
+							"name": "dns/record/update",
 							"request": {
-								"method": "PUT",
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
@@ -92,7 +91,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/v1/dns/record",
+									"raw": "http://localhost:3000/api/v1/dns/record/update",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -102,16 +101,17 @@
 										"api",
 										"v1",
 										"dns",
-										"record"
+										"record",
+										"update"
 									]
 								}
 							},
 							"response": []
 						},
 						{
-							"name": "dns/record",
+							"name": "dns/record/delete",
 							"request": {
-								"method": "DELETE",
+								"method": "POST",
 								"header": [],
 								"body": {
 									"mode": "raw",
@@ -123,7 +123,7 @@
 									}
 								},
 								"url": {
-									"raw": "http://localhost:3000/api/v1/dns/record",
+									"raw": "http://localhost:3000/api/v1/dns/record/delete",
 									"protocol": "http",
 									"host": [
 										"localhost"
@@ -133,7 +133,8 @@
 										"api",
 										"v1",
 										"dns",
-										"record"
+										"record",
+										"delete"
 									]
 								}
 							},
