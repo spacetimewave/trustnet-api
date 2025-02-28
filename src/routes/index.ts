@@ -17,7 +17,9 @@ router.post(
   ) {
     const getDnsRecordMessage: IGetDnsRecordMessage = req.body;
     console.log(getDnsRecordMessage);
-    const dnsRecord = await req.dnsService.getDnsRecord(getDnsRecordMessage);
+    const dnsRecord = await req.dnsService.getDnsRecordWithoutAuth(
+      getDnsRecordMessage
+    );
 
     if (dnsRecord === undefined) {
       res.sendStatus(404);

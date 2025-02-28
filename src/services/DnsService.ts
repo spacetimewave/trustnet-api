@@ -17,9 +17,15 @@ export class DnsService {
 
   async getDnsRecord(getDnsRecordMessage: IGetDnsRecordMessage) {
     const valid = await Account.verifyMessage(getDnsRecordMessage);
+    console.log("valid", valid);
     if (!valid) {
       throw new Error("Invalid message");
     }
+    const domainName = getDnsRecordMessage.content.domainName;
+    return await this.dnsRepository.getDnsEntryByName(domainName);
+  }
+
+  async getDnsRecordWithoutAuth(getDnsRecordMessage: IGetDnsRecordMessage) {
     const domainName = getDnsRecordMessage.content.domainName;
     return await this.dnsRepository.getDnsEntryByName(domainName);
   }
