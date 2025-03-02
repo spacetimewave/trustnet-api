@@ -1,21 +1,21 @@
 /**
- * Maps a source object to a target type by picking only properties that exist in the target interface
- * @param source Source object with data
- * @param targetObj An empty object of target type (used for type inference)
- * @returns A new object with only the properties from the target interface
+ * Maps properties from a source object to a target object type
+ * Handles CouchDB specific fields (_id, _rev) and maps all other properties
+ * @param source The source object from CouchDB
+ * @param targetType An empty object of the target type (used for TypeScript typing only)
+ * @returns A new object with properties mapped from source to target type
  */
-export function mapObject<T extends object>(source: any, targetObj: T): T {
-  const result = {} as T;
+export function AutoMap<T>(source: any, targetType: T): T {
+  if (!source) return targetType;
 
-  // Get all property names from the target type
-  const targetKeys = Object.keys(targetObj);
+  const result = { ...targetType } as any;
 
-  // Copy only the properties that exist in both source and target
-  for (const key of Object.keys(source)) {
-    if (key in targetObj) {
-      (result as any)[key] = source[key];
+  // Copy all properties except CouchDB specific ones
+  Object.keys(source).forEach((key) => {
+    if (key !== "_id" && key !== "_rev") {
+      result[key] = source[key];
     }
-  }
+  });
 
-  return result;
+  return result as T;
 }

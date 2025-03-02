@@ -1,6 +1,6 @@
 import Nano, { MangoResponse } from "nano";
 import { IDnsRecord, ISeedBlock } from "@spacetimewave/trustnet-engine";
-import { mapObject } from "../common/Mapper";
+import { AutoMap } from "../common/Mapper";
 
 export class AccountRepository {
   public dbEndpoint: string;
@@ -33,15 +33,14 @@ export class AccountRepository {
       await database.auth(this.dbUser, this.dbPassword);
       const table = database.db.use(this.ACCOUNT_SEED_BLOCK_TABLE);
       const response = (await table.find({
-        selector: { accountPublicKey: accountPublicKey },
+        selector: { address: accountPublicKey },
       })) as MangoResponse<IDnsRecord | undefined>;
       if (response.docs.length === 0) {
         return undefined;
       }
 
       const doc = response.docs[0];
-      const seedBlock = mapObject(response.docs[0], {} as ISeedBlock);
-
+      const seedBlock = AutoMap(response.docs[0], {} as ISeedBlock);
       return seedBlock;
     } catch (error: unknown) {
       throw new Error();
