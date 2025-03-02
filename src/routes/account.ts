@@ -13,7 +13,7 @@ router.post(
     res: express.Response,
     next: express.NextFunction
   ) {
-    if (req.query.auth) {
+    if (req.query.auth === "true") {
       const getAccountSeedBlockMessage: IGetAccountSeedBlockMessage = req.body;
       const seedBlock = await req.accountService.getAccountSeedBlock(
         getAccountSeedBlockMessage
@@ -22,10 +22,16 @@ router.post(
     } else {
       const getAccountSeedBlockMessage: IGetAccountSeedBlockUnauthenticatedMessage =
         req.body;
+
       const seedBlock =
         await req.accountService.getAccountSeedBlockUnauthenticated(
           getAccountSeedBlockMessage
         );
+
+      if (seedBlock === null) {
+        res.status(404).send("Seed block not found");
+        return;
+      }
       res.json(seedBlock);
     }
   }
