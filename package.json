@@ -7,7 +7,7 @@
     "tsc": "tsc"
   },
   "dependencies": {
-    "@spacetimewave/trustnet-engine": "0.7.1",
+    "@spacetimewave/trustnet-engine": "0.8.2",
     "cookie-parser": "~1.4.4",
     "cors": "^2.8.5",
     "debug": "~2.6.9",

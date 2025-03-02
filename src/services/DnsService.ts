@@ -1,9 +1,6 @@
 import {
   Account,
-  Core,
-  ICreateDnsRecordContent,
   ICreateDnsRecordMessage,
-  IDnsRecord,
   IGetDnsRecordMessage,
 } from "@spacetimewave/trustnet-engine";
 import { DnsRepository } from "../repositories/DnsRepository";
@@ -17,7 +14,6 @@ export class DnsService {
 
   async getDnsRecord(getDnsRecordMessage: IGetDnsRecordMessage) {
     const valid = await Account.verifyMessage(getDnsRecordMessage);
-    console.log("valid", valid);
     if (!valid) {
       throw new Error("Invalid message");
     }
@@ -32,7 +28,6 @@ export class DnsService {
 
   async createDnsRecord(createDnsRecordMessage: ICreateDnsRecordMessage) {
     const valid = await Account.verifyMessage(createDnsRecordMessage);
-    console.log("valid", valid);
     if (!valid) {
       throw new Error("Invalid message");
     }

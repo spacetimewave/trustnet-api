@@ -16,10 +16,12 @@ router.post(
     next: express.NextFunction
   ) {
     const getDnsRecordMessage: IGetDnsRecordMessage = req.body;
-    console.log(getDnsRecordMessage);
-    const dnsRecord = await req.dnsService.getDnsRecordWithoutAuth(
-      getDnsRecordMessage
-    );
+
+    const auth = req.query.auth === "false";
+
+    const dnsRecord = auth
+      ? await req.dnsService.getDnsRecordWithoutAuth(getDnsRecordMessage)
+      : await req.dnsService.getDnsRecord(getDnsRecordMessage);
 
     if (dnsRecord === undefined) {
       res.sendStatus(404);
@@ -39,7 +41,7 @@ router.post(
   ): Promise<void> {
     const createDnsRecordMessage: ICreateDnsRecordMessage = req.body;
     await req.dnsService.createDnsRecord(createDnsRecordMessage);
-    res.sendStatus(201);
+    res.status(201).json(createDnsRecordMessage.content.dnsRecord);
   }
 );
 

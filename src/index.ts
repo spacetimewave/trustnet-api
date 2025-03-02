@@ -5,10 +5,13 @@ import cookieParser from "cookie-parser";
 import logger from "morgan";
 import cors from "cors";
 
-import { router as indexRouter } from "./routes/index";
+import { router as dnsRouter } from "./routes/dns";
+import { router as accountRouter } from "./routes/account";
 
 import { DnsRepository } from "./repositories/DnsRepository";
 import { DnsService } from "./services/DnsService";
+import { AccountRepository } from "./repositories/AccountRepository";
+import { AccountService } from "./services/AccountService";
 
 dotenv.config({ path: __dirname + "/.env.localhost" });
 var app = express();
@@ -21,8 +24,14 @@ const dnsRepository = new DnsRepository(
   process.env.COUCHDB_USER ?? "",
   process.env.COUCHDB_PSWD ?? ""
 );
+const accountRepository = new AccountRepository(
+  process.env.COUCHDB_URL ?? "",
+  process.env.COUCHDB_USER ?? "",
+  process.env.COUCHDB_PSWD ?? ""
+);
 
 const dnsService = new DnsService(dnsRepository);
+const accountService = new AccountService(accountRepository);
 
 // Dependency Injection Middleware
 declare global {
@@ -30,6 +39,8 @@ declare global {
     interface Request {
       dnsRepository: DnsRepository;
       dnsService: DnsService;
+      accountRepository: AccountRepository;
+      accountService: AccountService;
     }
   }
 }
@@ -37,6 +48,8 @@ declare global {
 app.use((req, res, next) => {
   req.dnsRepository = dnsRepository;
   req.dnsService = dnsService;
+  req.accountRepository = accountRepository;
+  req.accountService = accountService;
   next();
 });
 
@@ -51,7 +64,8 @@ app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use("/", indexRouter);
+app.use("/", dnsRouter);
+app.use("/", accountRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
