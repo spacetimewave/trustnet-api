@@ -7,11 +7,17 @@ import cors from "cors";
 
 import { router as dnsRouter } from "./routes/dns";
 import { router as accountRouter } from "./routes/account";
+import { router as dnsMarketplaceRouter } from "./routes/dnsMarketplace";
+import { router as hostingMarketplaceRouter } from "./routes/hostingMarketplace";
 
 import { DnsRepository } from "./repositories/DnsRepository";
 import { DnsService } from "./services/DnsService";
 import { AccountRepository } from "./repositories/AccountRepository";
 import { AccountService } from "./services/AccountService";
+import { DnsMarketplaceRepository } from "./repositories/DnsMarketplaceRepository";
+import { DnsMarketplaceService } from "./services/DnsMarketplace";
+import { HostingMarketplaceRepository } from "./repositories/HostingMarketplaceRepository";
+import { HostingMarketplaceService } from "./services/HostingMarketplace";
 
 dotenv.config({ path: __dirname + "/.env.localhost" });
 var app = express();
@@ -24,21 +30,44 @@ const dnsRepository = new DnsRepository(
   process.env.COUCHDB_USER ?? "",
   process.env.COUCHDB_PSWD ?? ""
 );
+const dnsMarketplaceRepository = new DnsMarketplaceRepository(
+  process.env.COUCHDB_URL ?? "",
+  process.env.DNS_PROVIDERS_DATABASE_NAME ?? "",
+  process.env.COUCHDB_USER ?? "",
+  process.env.COUCHDB_PSWD ?? ""
+);
+
+const hostingMarketplaceRepository = new HostingMarketplaceRepository(
+  process.env.COUCHDB_URL ?? "",
+  process.env.HOSTING_PROVIDERS_DATABASE_NAME ?? "",
+  process.env.COUCHDB_USER ?? "",
+  process.env.COUCHDB_PSWD ?? ""
+);
 const accountRepository = new AccountRepository(
   process.env.COUCHDB_URL ?? "",
+  process.env.ACCOUNT_SEED_BLOCKS_DATABASE_NAME ?? "",
   process.env.COUCHDB_USER ?? "",
   process.env.COUCHDB_PSWD ?? ""
 );
 
 const dnsService = new DnsService(dnsRepository);
 const accountService = new AccountService(accountRepository);
-
+const dnsMarketplaceService = new DnsMarketplaceService(
+  dnsMarketplaceRepository
+);
+const hostingMarketplaceService = new HostingMarketplaceService(
+  hostingMarketplaceRepository
+);
 // Dependency Injection Middleware
 declare global {
   namespace Express {
     interface Request {
       dnsRepository: DnsRepository;
       dnsService: DnsService;
+      dnsMarketplaceRepository: DnsMarketplaceRepository;
+      dnsMarketplaceService: DnsMarketplaceService;
+      hostingMarketplaceRepository: HostingMarketplaceRepository;
+      hostingMarketplaceService: HostingMarketplaceService;
       accountRepository: AccountRepository;
       accountService: AccountService;
     }
@@ -48,6 +77,10 @@ declare global {
 app.use((req, res, next) => {
   req.dnsRepository = dnsRepository;
   req.dnsService = dnsService;
+  req.dnsMarketplaceRepository = dnsMarketplaceRepository;
+  req.dnsMarketplaceService = dnsMarketplaceService;
+  req.hostingMarketplaceRepository = hostingMarketplaceRepository;
+  req.hostingMarketplaceService = hostingMarketplaceService;
   req.accountRepository = accountRepository;
   req.accountService = accountService;
   next();
@@ -65,6 +98,8 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use("/", dnsRouter);
+app.use("/", dnsMarketplaceRouter);
+app.use("/", hostingMarketplaceRouter);
 app.use("/", accountRouter);
 
 // catch 404 and forward to error handler

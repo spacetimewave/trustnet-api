@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "ec824cc5-1102-4a61-b7a1-382237a21a0b",
+		"_postman_id": "2803e59b-cda7-4084-ba4b-e9354dd23913",
 		"name": "trustnet-api",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "26463812"
@@ -13,132 +13,280 @@
 					"name": "dns",
 					"item": [
 						{
-							"name": "dns/record/get",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"header\": {\r\n        \"version\": 1,\r\n        \"output_hash\": \"0x0d80d81a6025ba10e5c6dcf8d886e4dd83b4e6c5c9bac44ed6c4eaf342953bf0\",\r\n        \"address\": \"0x00040000002c00e700e900f4000200e7007300ba002f00a400b9006d00ed006c000f008c0060005600d7000700f800520014006b00b2008000a1000800df00dc00ea00580069003200a4002800a200f100c700cb00a5007200c400e600f00052002c004500f500ee0025003c005b009a0070004c009b000500d40092000300760072\",\r\n        \"public_key\": \"0x000400d500fa007700f90052005300bf00b800a10024000900a100150029009400bf00700018007400e90070003100ef00e400a900c900f900360021008100d500270079008b00ce006a00e1005c00930018007700a800ec00cf007000c30035008200c70028005200d6005a001800a5000e0054000400aa00cc001d00ea00a400fd\",\r\n        \"signature\": \"0x00be002700d700a700a70052007a00ac00e300cb00ca0046002a00ee00e6005c00c6000d00d9001100a8006b000d0038009e005100670019005100ec002000ce0080008e0029001e00a9007a00cc00ad00180095006700e300dc003e00b700c00050001f004c00660060000100c1006900190034007f001b006a000300820009\"\r\n    },\r\n    \"content\": {\r\n        \"domainName\": \"example.stw\"\r\n    },\r\n    \"metadata\": {\r\n        \"seed_block\": {\r\n            \"version\": 1,\r\n            \"address\": \"0x00040000002c00e700e900f4000200e7007300ba002f00a400b9006d00ed006c000f008c0060005600d7000700f800520014006b00b2008000a1000800df00dc00ea00580069003200a4002800a200f100c700cb00a5007200c400e600f00052002c004500f500ee0025003c005b009a0070004c009b000500d40092000300760072\",\r\n            \"public_key\": \"0x000400d500fa007700f90052005300bf00b800a10024000900a100150029009400bf00700018007400e90070003100ef00e400a900c900f900360021008100d500270079008b00ce006a00e1005c00930018007700a800ec00cf007000c30035008200c70028005200d6005a001800a5000e0054000400aa00cc001d00ea00a400fd\",\r\n            \"update_id\": 1,\r\n            \"signature\": \"0x00eb005000790027007e00dd008d00f60066009f00fd00b9005800f5008e0075003e00ed00a300c700b500d1007500a200b8006b00320097001200d00013000e002300440036000000cd00c600ee00e300db0090004c005a00e000fb002e0038007600c70091003f00e400ce0011003200eb00c100ea00fb004700db009f007c\"\r\n        }\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+							"name": "Record",
+							"item": [
+								{
+									"name": "dns/record/get",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"header\": {\r\n        \"version\": 1,\r\n        \"output_hash\": \"0x0d80d81a6025ba10e5c6dcf8d886e4dd83b4e6c5c9bac44ed6c4eaf342953bf0\",\r\n        \"address\": \"0x00040000002c00e700e900f4000200e7007300ba002f00a400b9006d00ed006c000f008c0060005600d7000700f800520014006b00b2008000a1000800df00dc00ea00580069003200a4002800a200f100c700cb00a5007200c400e600f00052002c004500f500ee0025003c005b009a0070004c009b000500d40092000300760072\",\r\n        \"public_key\": \"0x000400d500fa007700f90052005300bf00b800a10024000900a100150029009400bf00700018007400e90070003100ef00e400a900c900f900360021008100d500270079008b00ce006a00e1005c00930018007700a800ec00cf007000c30035008200c70028005200d6005a001800a5000e0054000400aa00cc001d00ea00a400fd\",\r\n        \"signature\": \"0x00be002700d700a700a70052007a00ac00e300cb00ca0046002a00ee00e6005c00c6000d00d9001100a8006b000d0038009e005100670019005100ec002000ce0080008e0029001e00a9007a00cc00ad00180095006700e300dc003e00b700c00050001f004c00660060000100c1006900190034007f001b006a000300820009\"\r\n    },\r\n    \"content\": {\r\n        \"domainName\": \"example.stw\"\r\n    },\r\n    \"metadata\": {\r\n        \"seed_block\": {\r\n            \"version\": 1,\r\n            \"address\": \"0x00040000002c00e700e900f4000200e7007300ba002f00a400b9006d00ed006c000f008c0060005600d7000700f800520014006b00b2008000a1000800df00dc00ea00580069003200a4002800a200f100c700cb00a5007200c400e600f00052002c004500f500ee0025003c005b009a0070004c009b000500d40092000300760072\",\r\n            \"public_key\": \"0x000400d500fa007700f90052005300bf00b800a10024000900a100150029009400bf00700018007400e90070003100ef00e400a900c900f900360021008100d500270079008b00ce006a00e1005c00930018007700a800ec00cf007000c30035008200c70028005200d6005a001800a5000e0054000400aa00cc001d00ea00a400fd\",\r\n            \"update_id\": 1,\r\n            \"signature\": \"0x00eb005000790027007e00dd008d00f60066009f00fd00b9005800f5008e0075003e00ed00a300c700b500d1007500a200b8006b00320097001200d00013000e002300440036000000cd00c600ee00e300db0090004c005a00e000fb002e0038007600c70091003f00e400ce0011003200eb00c100ea00fb004700db009f007c\"\r\n        }\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/v1/dns/record/get",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"v1",
+												"dns",
+												"record",
+												"get"
+											]
 										}
-									}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "http://localhost:3000/api/v1/dns/record/get",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"api",
-										"v1",
-										"dns",
-										"record",
-										"get"
-									]
+								{
+									"name": "dns/record/create",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"header\": {\r\n        \"version\": 1,\r\n        \"output_hash\": \"0x5fa4c03d18d279350132eafe873314c27cba18855dbacd913dad0e0eb695ace6\",\r\n        \"address\": \"0x0004003e0005007a001500c200b200740025007300ef00b1009900af00d4006800a800270074006800da009c008000e00069008700fc0059005a000e00f3001d00aa0029005500a400dc006000e9003900a5008f00140098002300dc00b600e000c1009c000e000900d5001800d800e3008f0061007e00470034003f007f0005007f\",\r\n        \"public_key\": \"0x000400e1009400a5007900620029009a00f1007f00a900bb005200b900b70045002a0034009b004a00b8008e004000c500e200860001000f00b0005100010016006100ed004c00050001002c00ad008700d6005700000025009a00e3005c00780099004b007e003400b700b5003d00cc00a3007100b200af005500d7005a0000009d\",\r\n        \"signature\": \"0x006b00f700e8001b002f0086009f008a004a001700c700140060001800c8006c00aa00ff001400bd001e00c5000d0087005700e800af00060062002f006500ea004400250097007f00030017007300cc005a003f001c0090005c006b0040008c00a800d90072005f0036009700c000e000fc00c6008500a8009400c200e90075\"\r\n    },\r\n    \"content\": {\r\n        \"dnsRecord\": {\r\n            \"domainName\": \"example.stw\",\r\n            \"accountPublicKey\": \"0x0004003e0005007a001500c200b200740025007300ef00b1009900af00d4006800a800270074006800da009c008000e00069008700fc0059005a000e00f3001d00aa0029005500a400dc006000e9003900a5008f00140098002300dc00b600e000c1009c000e000900d5001800d800e3008f0061007e00470034003f007f0005007f\",\r\n            \"hostingProviderAddresses\": [\r\n                \"localhost:3000\",\r\n                \"hosting.spacetimewave.com\"\r\n            ]\r\n        }\r\n    },\r\n    \"metadata\": {\r\n        \"seed_block\": {\r\n            \"version\": 1,\r\n            \"address\": \"0x0004003e0005007a001500c200b200740025007300ef00b1009900af00d4006800a800270074006800da009c008000e00069008700fc0059005a000e00f3001d00aa0029005500a400dc006000e9003900a5008f00140098002300dc00b600e000c1009c000e000900d5001800d800e3008f0061007e00470034003f007f0005007f\",\r\n            \"public_key\": \"0x000400e1009400a5007900620029009a00f1007f00a900bb005200b900b70045002a0034009b004a00b8008e004000c500e200860001000f00b0005100010016006100ed004c00050001002c00ad008700d6005700000025009a00e3005c00780099004b007e003400b700b5003d00cc00a3007100b200af005500d7005a0000009d\",\r\n            \"update_id\": 1,\r\n            \"signature\": \"0x00be00d40099003b002f00b9009000dd0069002500a30012002e007700ef00620075008e006000250084003900780071000a002f006500df00eb002800d7006300bc00dc003e00a4002600fb00ca00b8000500cd00e600a600f20090004200cf007f00ca00c400b20062003d00f3009d00ee00b5002e00ea009d009b00670008\"\r\n        }\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/v1/dns/record/create",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"v1",
+												"dns",
+												"record",
+												"create"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "dns/record/update",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"header\": {\r\n        \"version\": 1,\r\n        \"output_hash\": \"0x9232bdc8256c8578ad3911b176d488820f6190726f131dbe815932f23e82e1e6\",\r\n        \"address\": \"0x0004005800780068001c008e00b3005800b800e7000a00ee006a0047007f00a000de009700460012000400ff00c600940020009e002a002f008c00bf00a70071001a0090002e000a001500e600ba009800f000c80061003400fe0071005800e0006200c7006500340090008200e00039004b002900d4003000f1006d001f00c70034\",\r\n        \"public_key\": \"0x000400be0021006000cd003d005d00da00e0000b009e000c003000970076005a0069009e00aa004c00b1004a00e3001900dd00c60084008d000a002000eb008d00be0015005700ca006600bb005a00ee009d006900290055006800a200bc0058002800d200f3008800fc00fd00740074009a00090081005e0084002d00ca004a0077\",\r\n        \"signature\": \"0x00a5008f00f10061005300cd006c0077008100ef006800f5000c0044000400130084000d000c003300e100ec009a00ab004b0081004d00ce00c300a300b500ab000f00d800830081002d00fd000900c600310019004300f10016007200be00ca00b500b800c3009500eb00d5006f003600e800900065001e00ae005c00ed008b\"\r\n    },\r\n    \"content\": {\r\n        \"dnsRecord\": {\r\n            \"domainName\": \"example.stw\",\r\n            \"accountPublicKey\": \"0x0004005800780068001c008e00b3005800b800e7000a00ee006a0047007f00a000de009700460012000400ff00c600940020009e002a002f008c00bf00a70071001a0090002e000a001500e600ba009800f000c80061003400fe0071005800e0006200c7006500340090008200e00039004b002900d4003000f1006d001f00c70034\",\r\n            \"hostingProviderAddresses\": [\r\n                \"localhost:3000\",\r\n                \"hosting.spacetimewave.com\",\r\n                \"hosting.wave.com\"\r\n            ]\r\n        }\r\n    },\r\n    \"metadata\": {\r\n        \"seed_block\": {\r\n            \"version\": 1,\r\n            \"address\": \"0x0004005800780068001c008e00b3005800b800e7000a00ee006a0047007f00a000de009700460012000400ff00c600940020009e002a002f008c00bf00a70071001a0090002e000a001500e600ba009800f000c80061003400fe0071005800e0006200c7006500340090008200e00039004b002900d4003000f1006d001f00c70034\",\r\n            \"public_key\": \"0x000400be0021006000cd003d005d00da00e0000b009e000c003000970076005a0069009e00aa004c00b1004a00e3001900dd00c60084008d000a002000eb008d00be0015005700ca006600bb005a00ee009d006900290055006800a200bc0058002800d200f3008800fc00fd00740074009a00090081005e0084002d00ca004a0077\",\r\n            \"update_id\": 1,\r\n            \"signature\": \"0x00e1001300f70043005a009800bb006a00c900f90086004c00e9006c00db0032003f007900aa004a00f8008b00d500d4007e00590090002b0004001500e20098002c000f00ec00fe0018007d00fd006a0047008d00c500c4008b005200ff008200640075006c003f0024008f00a8008000fb009500810093001500f200a00068\"\r\n        }\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/v1/dns/record/update",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"v1",
+												"dns",
+												"record",
+												"update"
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "dns/record/delete",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"header\": {\r\n        \"version\": 1,\r\n        \"output_hash\": \"0x0d80d81a6025ba10e5c6dcf8d886e4dd83b4e6c5c9bac44ed6c4eaf342953bf0\",\r\n        \"address\": \"0x000400f10085004b00b6005f003800c30029000b00c800bd00f700b800bd0015007600a90015003700b900f8002400bf00380011000300e3003b002b00b5003400a6008700b100e300f8004300fc009300b500e8009f00790068007200a10005003b002b006c00ea004b006900cd00c8003a0033001700dd0040004e00c000b100c9\",\r\n        \"public_key\": \"0x000400f4003a00c00070001500d400ed00e800af008c00830018002500f5001a005800ac000a005b004d00ae00ed002800cc00ea00ee00000056003100410053000a00f400f4001d00e600c0006200d9003a00c900c6004f004b00a000a7007f001900100069002c003600ed00090018007e001e00ee007f00ba0052003d004b009f\",\r\n        \"signature\": \"0x00f5003300cc007a0077005900f00007008e0003007a007e006f0022004c007a00d50044002b00e8003e001300dd00a100de00fd006900d4007d0038005e007600a800e2009400220057007400060074005d00db00330075008a003a008f00bd00be007500e50058007300b3008500b3006f002200c100fa00fa001c00710011\"\r\n    },\r\n    \"content\": {\r\n        \"domainName\": \"example.stw\"\r\n    },\r\n    \"metadata\": {\r\n        \"seed_block\": {\r\n            \"version\": 1,\r\n            \"address\": \"0x000400f10085004b00b6005f003800c30029000b00c800bd00f700b800bd0015007600a90015003700b900f8002400bf00380011000300e3003b002b00b5003400a6008700b100e300f8004300fc009300b500e8009f00790068007200a10005003b002b006c00ea004b006900cd00c8003a0033001700dd0040004e00c000b100c9\",\r\n            \"public_key\": \"0x000400f4003a00c00070001500d400ed00e800af008c00830018002500f5001a005800ac000a005b004d00ae00ed002800cc00ea00ee00000056003100410053000a00f400f4001d00e600c0006200d9003a00c900c6004f004b00a000a7007f001900100069002c003600ed00090018007e001e00ee007f00ba0052003d004b009f\",\r\n            \"update_id\": 1,\r\n            \"signature\": \"0x00bd002c000d007b005c009e0083001a0069000e009e0047005a0003006d005c005200a400ed00530057004f006300690078005d003700c7002c00cd00b10018003a004800c3008c00b500dc005600b7003d00c0005f00a1003c00d400460011005b001400dd007b008f003a00df00d4004e00fe002e00960047001a009e0017\"\r\n        }\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/v1/dns/record/delete",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"v1",
+												"dns",
+												"record",
+												"delete"
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
 						},
 						{
-							"name": "dns/record/create",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"header\": {\r\n        \"version\": 1,\r\n        \"output_hash\": \"0x5fa4c03d18d279350132eafe873314c27cba18855dbacd913dad0e0eb695ace6\",\r\n        \"address\": \"0x0004003e0005007a001500c200b200740025007300ef00b1009900af00d4006800a800270074006800da009c008000e00069008700fc0059005a000e00f3001d00aa0029005500a400dc006000e9003900a5008f00140098002300dc00b600e000c1009c000e000900d5001800d800e3008f0061007e00470034003f007f0005007f\",\r\n        \"public_key\": \"0x000400e1009400a5007900620029009a00f1007f00a900bb005200b900b70045002a0034009b004a00b8008e004000c500e200860001000f00b0005100010016006100ed004c00050001002c00ad008700d6005700000025009a00e3005c00780099004b007e003400b700b5003d00cc00a3007100b200af005500d7005a0000009d\",\r\n        \"signature\": \"0x006b00f700e8001b002f0086009f008a004a001700c700140060001800c8006c00aa00ff001400bd001e00c5000d0087005700e800af00060062002f006500ea004400250097007f00030017007300cc005a003f001c0090005c006b0040008c00a800d90072005f0036009700c000e000fc00c6008500a8009400c200e90075\"\r\n    },\r\n    \"content\": {\r\n        \"dnsRecord\": {\r\n            \"domainName\": \"example.stw\",\r\n            \"accountPublicKey\": \"0x0004003e0005007a001500c200b200740025007300ef00b1009900af00d4006800a800270074006800da009c008000e00069008700fc0059005a000e00f3001d00aa0029005500a400dc006000e9003900a5008f00140098002300dc00b600e000c1009c000e000900d5001800d800e3008f0061007e00470034003f007f0005007f\",\r\n            \"hostingProviderAddresses\": [\r\n                \"localhost:3000\",\r\n                \"hosting.spacetimewave.com\"\r\n            ]\r\n        }\r\n    },\r\n    \"metadata\": {\r\n        \"seed_block\": {\r\n            \"version\": 1,\r\n            \"address\": \"0x0004003e0005007a001500c200b200740025007300ef00b1009900af00d4006800a800270074006800da009c008000e00069008700fc0059005a000e00f3001d00aa0029005500a400dc006000e9003900a5008f00140098002300dc00b600e000c1009c000e000900d5001800d800e3008f0061007e00470034003f007f0005007f\",\r\n            \"public_key\": \"0x000400e1009400a5007900620029009a00f1007f00a900bb005200b900b70045002a0034009b004a00b8008e004000c500e200860001000f00b0005100010016006100ed004c00050001002c00ad008700d6005700000025009a00e3005c00780099004b007e003400b700b5003d00cc00a3007100b200af005500d7005a0000009d\",\r\n            \"update_id\": 1,\r\n            \"signature\": \"0x00be00d40099003b002f00b9009000dd0069002500a30012002e007700ef00620075008e006000250084003900780071000a002f006500df00eb002800d7006300bc00dc003e00a4002600fb00ca00b8000500cd00e600a600f20090004200cf007f00ca00c400b20062003d00f3009d00ee00b5002e00ea009d009b00670008\"\r\n        }\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+							"name": "Marketplace",
+							"item": [
+								{
+									"name": "dns/marketplace/get",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"content\": {\r\n        \"search\": \"dns-provider\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/v1/dns/marketplace/get",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"v1",
+												"dns",
+												"marketplace",
+												"get"
+											]
 										}
-									}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "http://localhost:3000/api/v1/dns/record/create",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"api",
-										"v1",
-										"dns",
-										"record",
-										"create"
-									]
+								{
+									"name": "dns/marketplace/create",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"header\": {\r\n    \"version\": 1,\r\n    \"output_hash\": \"0x84f74bc44135aaabd6e2b04d2e68f17203328bf79b3bd5a1ce8292d0b9765726\",\r\n    \"address\": \"0x0004009b000700e400c2001d00340059006b009a0072006400bc002c0028001c008000d000ca003b00a7008a00a7007f009700ec003e00ad002b003800dd00a800510040003100c000cd0090006100970051006b00f3001600de00720011004e0042004e006600f700320075006000f800c50043000300d9003a000400160047008f\",\r\n    \"public_key\": \"0x000400fb00ca008b00e800c800d50030009900880037004d00cb0031008a00fd0023001b0060002e007c00b300830081009b00b500d2000300fc00600090001600bf00ba0085005b00b200f600a2007b00bf005300a80040003400b50096009500b100f7000600ff008e00e800900064008000630007006e008a00210000008200a4\",\r\n    \"signature\": \"0x00b800d2003900e4009b001b00ef00d700f400e000e300b000d60052003100fe0009009c00a1004d00a600d700e200a3003d00a2005100fd00ab003400c80000006f00f200c800f8006c005a005c0079005c002f0061005d002000f40003001700f300c400da0071002a00e2004200c000d5005000bf003e00e0008b00960009\"\r\n  },\r\n  \"content\": {\r\n    \"dnsProvider\": {\r\n      \"ownerPublicAddress\": \"0x0004002900d9009f007400ce00c40014000400f400ff0044003900ae00d3006100700000009900b2003700ff004f006b004c002900be00900089005a0028002c003b00ff0009009e00a700800018008e00d7002b0097009f002f002e002200d600b300530059008f005e005900d800cd00f0008a00e3002a00d7009b000700d400c2\",\r\n      \"domainExtension\": \".stw\",\r\n      \"nameServerAddress\": [\"localhost:3000\",\"hosting.spacetimewave.com\"]\r\n    }\r\n  },\r\n  \"metadata\": {\r\n    \"seed_block\": {\r\n      \"version\": 1,\r\n      \"address\": \"0x0004009b000700e400c2001d00340059006b009a0072006400bc002c0028001c008000d000ca003b00a7008a00a7007f009700ec003e00ad002b003800dd00a800510040003100c000cd0090006100970051006b00f3001600de00720011004e0042004e006600f700320075006000f800c50043000300d9003a000400160047008f\",\r\n      \"public_key\": \"0x000400fb00ca008b00e800c800d50030009900880037004d00cb0031008a00fd0023001b0060002e007c00b300830081009b00b500d2000300fc00600090001600bf00ba0085005b00b200f600a2007b00bf005300a80040003400b50096009500b100f7000600ff008e00e800900064008000630007006e008a00210000008200a4\",\r\n      \"update_id\": 1,\r\n      \"signature\": \"0x00a400e80025008a00e600b00094002300b9004f009b001700a200b100be00a0006e00e600e3000b005000c30084008b00940001007e006f003900ec004900a2006d008800060060004e00e7007c00ea00da00e800d2004f00b600f90077000300130008001a0014002d00a900b2007100dd000d003f00ea00dd00e300a100c7\"\r\n    }\r\n  }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/v1/dns/marketplace/create",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"v1",
+												"dns",
+												"marketplace",
+												"create"
+											]
+										}
+									},
+									"response": []
 								}
-							},
-							"response": []
-						},
+							]
+						}
+					]
+				},
+				{
+					"name": "hosting",
+					"item": [
 						{
-							"name": "dns/record/update",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"header\": {\r\n        \"version\": 1,\r\n        \"output_hash\": \"0x9232bdc8256c8578ad3911b176d488820f6190726f131dbe815932f23e82e1e6\",\r\n        \"address\": \"0x0004005800780068001c008e00b3005800b800e7000a00ee006a0047007f00a000de009700460012000400ff00c600940020009e002a002f008c00bf00a70071001a0090002e000a001500e600ba009800f000c80061003400fe0071005800e0006200c7006500340090008200e00039004b002900d4003000f1006d001f00c70034\",\r\n        \"public_key\": \"0x000400be0021006000cd003d005d00da00e0000b009e000c003000970076005a0069009e00aa004c00b1004a00e3001900dd00c60084008d000a002000eb008d00be0015005700ca006600bb005a00ee009d006900290055006800a200bc0058002800d200f3008800fc00fd00740074009a00090081005e0084002d00ca004a0077\",\r\n        \"signature\": \"0x00a5008f00f10061005300cd006c0077008100ef006800f5000c0044000400130084000d000c003300e100ec009a00ab004b0081004d00ce00c300a300b500ab000f00d800830081002d00fd000900c600310019004300f10016007200be00ca00b500b800c3009500eb00d5006f003600e800900065001e00ae005c00ed008b\"\r\n    },\r\n    \"content\": {\r\n        \"dnsRecord\": {\r\n            \"domainName\": \"example.stw\",\r\n            \"accountPublicKey\": \"0x0004005800780068001c008e00b3005800b800e7000a00ee006a0047007f00a000de009700460012000400ff00c600940020009e002a002f008c00bf00a70071001a0090002e000a001500e600ba009800f000c80061003400fe0071005800e0006200c7006500340090008200e00039004b002900d4003000f1006d001f00c70034\",\r\n            \"hostingProviderAddresses\": [\r\n                \"localhost:3000\",\r\n                \"hosting.spacetimewave.com\",\r\n                \"hosting.wave.com\"\r\n            ]\r\n        }\r\n    },\r\n    \"metadata\": {\r\n        \"seed_block\": {\r\n            \"version\": 1,\r\n            \"address\": \"0x0004005800780068001c008e00b3005800b800e7000a00ee006a0047007f00a000de009700460012000400ff00c600940020009e002a002f008c00bf00a70071001a0090002e000a001500e600ba009800f000c80061003400fe0071005800e0006200c7006500340090008200e00039004b002900d4003000f1006d001f00c70034\",\r\n            \"public_key\": \"0x000400be0021006000cd003d005d00da00e0000b009e000c003000970076005a0069009e00aa004c00b1004a00e3001900dd00c60084008d000a002000eb008d00be0015005700ca006600bb005a00ee009d006900290055006800a200bc0058002800d200f3008800fc00fd00740074009a00090081005e0084002d00ca004a0077\",\r\n            \"update_id\": 1,\r\n            \"signature\": \"0x00e1001300f70043005a009800bb006a00c900f90086004c00e9006c00db0032003f007900aa004a00f8008b00d500d4007e00590090002b0004001500e20098002c000f00ec00fe0018007d00fd006a0047008d00c500c4008b005200ff008200640075006c003f0024008f00a8008000fb009500810093001500f200a00068\"\r\n        }\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+							"name": "Marketplace",
+							"item": [
+								{
+									"name": "hosting/marketplace/get",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"content\": {\r\n        \"search\": \"hosting-provider\"\r\n    }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/v1/hosting/marketplace/get",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"v1",
+												"hosting",
+												"marketplace",
+												"get"
+											]
 										}
-									}
+									},
+									"response": []
 								},
-								"url": {
-									"raw": "http://localhost:3000/api/v1/dns/record/update",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"api",
-										"v1",
-										"dns",
-										"record",
-										"update"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "dns/record/delete",
-							"request": {
-								"method": "POST",
-								"header": [],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"header\": {\r\n        \"version\": 1,\r\n        \"output_hash\": \"0x0d80d81a6025ba10e5c6dcf8d886e4dd83b4e6c5c9bac44ed6c4eaf342953bf0\",\r\n        \"address\": \"0x000400f10085004b00b6005f003800c30029000b00c800bd00f700b800bd0015007600a90015003700b900f8002400bf00380011000300e3003b002b00b5003400a6008700b100e300f8004300fc009300b500e8009f00790068007200a10005003b002b006c00ea004b006900cd00c8003a0033001700dd0040004e00c000b100c9\",\r\n        \"public_key\": \"0x000400f4003a00c00070001500d400ed00e800af008c00830018002500f5001a005800ac000a005b004d00ae00ed002800cc00ea00ee00000056003100410053000a00f400f4001d00e600c0006200d9003a00c900c6004f004b00a000a7007f001900100069002c003600ed00090018007e001e00ee007f00ba0052003d004b009f\",\r\n        \"signature\": \"0x00f5003300cc007a0077005900f00007008e0003007a007e006f0022004c007a00d50044002b00e8003e001300dd00a100de00fd006900d4007d0038005e007600a800e2009400220057007400060074005d00db00330075008a003a008f00bd00be007500e50058007300b3008500b3006f002200c100fa00fa001c00710011\"\r\n    },\r\n    \"content\": {\r\n        \"domainName\": \"example.stw\"\r\n    },\r\n    \"metadata\": {\r\n        \"seed_block\": {\r\n            \"version\": 1,\r\n            \"address\": \"0x000400f10085004b00b6005f003800c30029000b00c800bd00f700b800bd0015007600a90015003700b900f8002400bf00380011000300e3003b002b00b5003400a6008700b100e300f8004300fc009300b500e8009f00790068007200a10005003b002b006c00ea004b006900cd00c8003a0033001700dd0040004e00c000b100c9\",\r\n            \"public_key\": \"0x000400f4003a00c00070001500d400ed00e800af008c00830018002500f5001a005800ac000a005b004d00ae00ed002800cc00ea00ee00000056003100410053000a00f400f4001d00e600c0006200d9003a00c900c6004f004b00a000a7007f001900100069002c003600ed00090018007e001e00ee007f00ba0052003d004b009f\",\r\n            \"update_id\": 1,\r\n            \"signature\": \"0x00bd002c000d007b005c009e0083001a0069000e009e0047005a0003006d005c005200a400ed00530057004f006300690078005d003700c7002c00cd00b10018003a004800c3008c00b500dc005600b7003d00c0005f00a1003c00d400460011005b001400dd007b008f003a00df00d4004e00fe002e00960047001a009e0017\"\r\n        }\r\n    }\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
+								{
+									"name": "hosting/marketplace/create",
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n  \"header\": {\r\n    \"version\": 1,\r\n    \"output_hash\": \"0x174688805cd2ad28646df829f3d2f51f4a628528f59c35282f7e246386e738df\",\r\n    \"address\": \"0x000400ee00ec009c000c00fd00c900ea007e0044007800f800f200810068001e00cf006f0048007800fb000800bf00b400a7005a00050061004100ed003100f400ae002000d2003f00d100e3001d0029004e006200350085008900f2004b0095007d002a003100a5003c00e400ef003500a4000500e500dd0041000800d9008e005b\",\r\n    \"public_key\": \"0x000400b600d600860086006e00e2002f00920050007800d3001300f700c6007c004700cc004b005600bc00ca009600850011000900d00098009f000800b2007500c700c300e000ec00d40028006b0080006c00ae002b003500e6001800ed0041004700cc00b500ac008e00b6003700b200c6005600e9001c0021005700f40052001d\",\r\n    \"signature\": \"0x006c00c3003400e900d1003a00c700330030001c002700390039007500b900d300810096002e002700a4008c003100b3001e00c000fa00e40050001000ff003a0031004d00b6004e003500f4004500090073009500580080005a007700dc00fa00b7008b00bf000b009d0003006300ae005c002800d9008000af00bd00dc0022\"\r\n  },\r\n  \"content\": {\r\n    \"hostingProvider\": {\r\n      \"ownerPublicAddress\": \"0x0004002900d9009f007400ce00c40014000400f400ff0044003900ae00d3006100700000009900b2003700ff004f006b004c002900be00900089005a0028002c003b00ff0009009e00a700800018008e00d7002b0097009f002f002e002200d600b300530059008f005e005900d800cd00f0008a00e3002a00d7009b000700d400c2\",\r\n      \"hostingName\": \"spacetimewave\",\r\n      \"hostingServerAddresses\": [\"localhost:3000\",\"hosting.spacetimewave.com\"]\r\n    }\r\n  },\r\n  \"metadata\": {\r\n    \"seed_block\": {\r\n      \"version\": 1,\r\n      \"address\": \"0x000400ee00ec009c000c00fd00c900ea007e0044007800f800f200810068001e00cf006f0048007800fb000800bf00b400a7005a00050061004100ed003100f400ae002000d2003f00d100e3001d0029004e006200350085008900f2004b0095007d002a003100a5003c00e400ef003500a4000500e500dd0041000800d9008e005b\",\r\n      \"public_key\": \"0x000400b600d600860086006e00e2002f00920050007800d3001300f700c6007c004700cc004b005600bc00ca009600850011000900d00098009f000800b2007500c700c300e000ec00d40028006b0080006c00ae002b003500e6001800ed0041004700cc00b500ac008e00b6003700b200c6005600e9001c0021005700f40052001d\",\r\n      \"update_id\": 1,\r\n      \"signature\": \"0x000f00b400bd00dd004500c00011004e00c700e70079002e007600310029000b00f7002d007a00ba0048005e0029009e00ca004600c3008000ae009d0062004000ba00d900b900680044002300c70042004a00d200b7006100b6001000e400e200a000b900a800870082006500a600da00ef00b50032008e001600740007002e\"\r\n    }\r\n  }\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "http://localhost:3000/api/v1/hosting/marketplace/create",
+											"protocol": "http",
+											"host": [
+												"localhost"
+											],
+											"port": "3000",
+											"path": [
+												"api",
+												"v1",
+												"hosting",
+												"marketplace",
+												"create"
+											]
 										}
-									}
-								},
-								"url": {
-									"raw": "http://localhost:3000/api/v1/dns/record/delete",
-									"protocol": "http",
-									"host": [
-										"localhost"
-									],
-									"port": "3000",
-									"path": [
-										"api",
-										"v1",
-										"dns",
-										"record",
-										"delete"
-									]
+									},
+									"response": []
 								}
-							},
-							"response": []
+							]
 						}
 					]
 				}
